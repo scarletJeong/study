@@ -30,6 +30,30 @@ CI/CD와 Docker, Kubernetes의 개념과 상호작용을 이해하고 이를 활
   - 코드가 자동으로 최종 사용자에게 배포됨.
   - 사람의 개입을 최소화하여 배포 속도와 안정성을 높임.
 
+#### 예시
+```
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker Image
+      run: |
+        docker build -t my-app:latest .
+
+    - name: Push Docker Image
+      run: |
+        docker push my-app:latest
+```
 ---
 
 ### 2. Docker
@@ -103,3 +127,4 @@ CI/CD와 Docker, Kubernetes의 개념과 상호작용을 이해하고 이를 활
 3. **Kubernetes의 강점**: Docker 컨테이너를 대규모로 관리하고, 확장성과 안정성을 제공함.
 4. **CI/CD의 역할**: 이 모든 과정을 자동화해 개발자들이 생산성을 높일 수 있게 만듦.
 
+[2024-12-06]

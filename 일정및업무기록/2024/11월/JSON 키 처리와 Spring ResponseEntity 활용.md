@@ -75,4 +75,4 @@ ResponseEntity<String> notFoundResponse = ResponseEntity.status(HttpStatus.NOT_F
 3. **API 응답의 구조화**: `ApiResponse`와 `ResponseEntity`를 활용하여 API 응답을 효율적으로 구성할 수 있음.
 4. **Spring의 HTTP 응답 제어**: Spring의 `ResponseEntity`는 상태 코드와 본문을 명확히 설정하여 클라이언트와의 소통을 더 유연하게 만듦.
 
- [2024-11-07
+ [2024-11-07]

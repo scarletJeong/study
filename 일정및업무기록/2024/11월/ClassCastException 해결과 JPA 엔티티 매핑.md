@@ -58,3 +58,4 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long> 
 3. **테스트의 필요성**:
    - 리포지토리 메서드 정의와 관련된 변경 사항은 단위 테스트를 통해 반드시 검증해야 함.
 
+[2024-11-12]

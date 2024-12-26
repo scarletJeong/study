@@ -6,51 +6,15 @@
 
 - [x] JavaScript vs JSP vs HTML, CASCADE 사용 이유, UUID 사용 이유
 
-# JavaScript vs JSP vs HTML, CASCADE와 UUID 활용 사례
+# CASCADE와 UUID 활용 사례
 
 ## 소개
-JavaScript, JSP, HTML의 차이점과 각각의 사용 사례를 정리하고, 데이터베이스에서 CASCADE와 UUID를 사용하는 이유와 이를 활용한 설계 사례를 공유함.
+데이터베이스에서 CASCADE와 UUID를 사용하는 이유와 이를 활용한 설계 사례를 공유함.
 
 ## 주요 학습 내용
 
-### 1. JavaScript vs JSP (Java Server Pages)
 
-#### JavaScript
-- **정의**: `<script>` 태그를 사용하는 프론트엔드 언어.
-- **특징**:
-  - HTML과 CSS에 동적인 기능 추가.
-  - 브라우저에서 실행되며, 버튼 클릭, 데이터 입력, 애니메이션 등 사용자 상호작용 처리.
-
-#### JSP (Java Server Pages)
-- **정의**: `<% %>` 태그를 사용하는 서버 측 언어.
-- **특징**:
-  - 서버에서 HTML을 동적으로 생성.
-  - Java 코드를 HTML에 삽입하여 데이터베이스와 상호작용.
-
-#### HTML
-- **정의**: 웹 페이지의 구조를 정의하는 언어.
-- **특징**:
-  - 정적이며, 사용자가 상호작용할 수 있는 동적 기능은 포함하지 않음.
-
-| 구분        | 정적                    | 동적                          |
-| --------- | --------------------- | --------------------------- |
-| 기술        | HTML, CSS, JavaScript | JSP, PHP, Node.js, Python.. |
-| 콘텐츠 생성 위치 | 클라이언트(브라우저)           | 서버                          |
-| 콘텐츠 변화    | 항상 동일한 HTML 제공         | 요청에 따라 HTML 콘텐츠가 달라짐         |
-| DB 연결     | x                     | o                           |
-| 예시        | 회사 소개 페이지              | 게시판, 전자상거래 사이트             |
-
-#### 예시 코드 (JSP 태그)
-```jsp
-<% String username = "John"; out.println("Hello, " + username + "!"); %>
-<p>현재 시간: <%= new java.util.Date() %></p>
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<jsp:include page="header.jsp" />
-```
-
----
-
-### 2. CASCADE
+### 1. CASCADE
 
 #### 정의
 - **CASCADE**는 데이터베이스에서 외래 키로 연결된 테이블 간의 작업(DELETE, UPDATE)을 자동으로 처리하는 옵션.
@@ -93,7 +57,7 @@ CREATE TABLE UserProfile (
 
 ---
 
-### 3. UUID 사용 이유
+### 2. UUID 사용 이유
 
 #### 정의
 - **UUID (Universally Unique Identifier)**는 전역적으로 고유한 식별자.
@@ -129,13 +93,11 @@ CREATE TABLE UserProfile (
 
 ## 깨달은 것
 
-1. **JavaScript, JSP, HTML의 차이**:
-   - 각 기술의 역할과 사용 사례를 이해함.
-   - 클라이언트-서버 간 작업 분할에 대한 중요성을 학습함.
-2. **CASCADE 사용 시 주의점**:
+1. **CASCADE 사용 시 주의점**:
    - 데이터 관리 자동화의 장점과 함께 데이터 손실 가능성도 고려해야 함.
    - 논리적 삭제의 장점과 활용 가능성을 이해함.
-3. **UUID의 유용성**:
+2. **UUID의 유용성**:
    - 데이터베이스 병합과 보안성 측면에서 UUID의 강점을 확인함.
    - 시스템 간 데이터 충돌 방지를 위한 효율적인 방법임.
 
+[2024-11-19]

@@ -71,3 +71,4 @@ Tomcat started on port(s): 8080 (http)
 3. **IntelliJ의 편리한 통합 환경**:
    - IDE 내에서 모든 설정과 실행 과정을 확인할 수 있어 생산성 향상.
 
+[2024-11-20]

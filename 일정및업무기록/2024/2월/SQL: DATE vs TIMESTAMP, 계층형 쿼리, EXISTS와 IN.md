@@ -108,3 +108,5 @@ CONNECT BY PRIOR CHILD_ID = PARENT_ID
 3. **EXISTS와 IN의 활용**:
    - EXISTS는 조건 존재 여부 확인에, IN은 값 포함 여부 확인에 적합함.
 
+
+[2024-02-06]

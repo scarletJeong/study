@@ -115,3 +115,4 @@
    - `toCharArray()`는 기본 자료형을 반환하여 Comparator와 호환되지 않음.
    - `.split()`은 문자열 객체를 반환하여 Comparator와 호환 가능함.
 
+[2024-02-12]

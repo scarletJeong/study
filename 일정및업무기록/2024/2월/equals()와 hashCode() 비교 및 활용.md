@@ -62,10 +62,16 @@ Object obj1 = new Object();
 Object obj2 = new Object();
 System.out.println(obj1.equals(obj2)); // false
 System.out.println(obj1.hashCode() == obj2것
+```
+---
+
+#### 다음에 공부해야 할 것
 1. what is method of 'Object'?
 2. String 변수를 선언하면서 리터럴을 이용하는것과 `new` 키워드로 선언하는 것의 차이
 3. 객체의 주소값,, 메모리 주소.. ㅁ약간 달랐는데 헷갈린다. 
 4. https://velog.io/@younghoondoodoom/JAVA-equals%EC%99%80-hashcode    > 여기 이해못하겠다..
 
+
+                                
 
 [2024-02-14]

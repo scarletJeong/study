@@ -1,66 +1,106 @@
-`mobaXterm을 사용해서 서버에 자르파일 업로드 및 서버 온/오프`
+# MobaXterm을 활용한 JAR 파일 업로드 및 서버 관리
 
-- Mobaxterm 
-	> 리눅스 환경의 SSH접속, FTP,  SFTP 등을 이 프로그램 하나로 다 사용가능
-	> `원격 접속을 위해서는 여러기자 원격접속용 프로그램을 설치해야함.`
-	> 
-	> - SSH  _Secure SHell_
-	> 	- 원격 접속 프로토콜
-	> 	- 네트워크 상, 다른 컴퓨터에 로그인 혹은 원격 접속 등을 해주는 프로토콜.
-	> 	   ` SSH 클라이언트 프로그램으로 putty, 파일질라, Git Bash 가 있음`
-	> 	   `AWS 클라우드에 서버 설치 후, 내 컴퓨터에서 클라우드 서버에 접속하고 싶을 때`
-	> 	   
-	> - FTP    _File Transfer Protocol_
-	> 	- 원격 파일 전송 protocol
-	>   
-	> - SFTP   _Secure File Transfer Protocol_
-	> 	 - 원격 파일 전송 프로토콜
-	
+## 소개
+
+MobaXterm을 사용하여 서버에 JAR 파일을 업로드하고, 서버를 관리 및 재시작하는 방법을 정리함.
+
+---
+
+## MobaXterm의 주요 기능
+
+1. **SSH (Secure Shell)**
+   - 원격 접속 프로토콜로, 네트워크 상에서 다른 컴퓨터에 로그인하거나 원격 작업을 수행 가능.
+   - 사용 예: 클라우드 서버에 접속.
+
+2. **FTP (File Transfer Protocol)**
+   - 원격 파일 전송 프로토콜로, 서버 간 파일 전송을 지원.
+
+3. **SFTP (Secure File Transfer Protocol)**
+   - SSH를 기반으로 한 파일 전송 프로토콜로, 보안성을 강화함.
+
+---
+
+## 설치 및 기본 설정
+
+### 1. MobaXterm 설치
+
+- 공식 사이트에서 다운로드 후 설치.
+
+### 2. 서버 접속 설정
+
+1. **Session 생성**:
+   - MobaXterm 실행 후 `Session → SSH` 선택.
+
+2. **접속 정보 입력**:
+   - **Remote host**: 원격 서버의 IP 주소 또는 도메인 (예: `i6a604.p.ssafy.io`)
+   - **Username**: 서버 사용자 이름 (예: `ubuntu`)
+   - **Advanced SSH settings**:
+     - `Use private key`에서 PEM 키 등록.
+     - 서버의 SSH 키를 `.pem` 형식으로 로컬에 다운로드한 후 등록.
+
+3. **MySQL과 Workbench 연결**
+
+	3-1. **MySQL 접속**:
+   ```bash
+   sudo /usr/bin/mysql -u root -p
+   ```
+	3-2. **외부 접근 가능 유저 생성**:
+   ```sql
+   CREATE USER 'root'@'%' IDENTIFIED BY '[password]';
+   GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+   ```
+
+---
+
+## JAR 파일 업로드 및 서버 관리
+
+### 1. 서버 작업 흐름
+
+1. **서버 IP 확인**:
+   ```bash
+   ip addr show
+   ```
+   - 서버의 네트워크 인터페이스와 IP 주소 확인.
+
+2. **서버 확인 및 종료**:
+   - 실행 중인 Java 프로세스 확인:
+     ```bash
+     ps aux | grep java
+     ```
+     출력 예시:
+     ```
+     ubuntu 1234 0.2 1.2 3403448 40124 ?  Sl  10:00 0:10 java -jar myapp.jar
+     ```
+   - 특정 포트에서 실행 중인 프로세스 확인:
+     ```bash
+     sudo lsof -i :8080
+     ```
+   - 프로세스 종료:
+     ```bash
+     sudo kill -9 1234
+     ```
+
+3. **JAR 파일 업로드**:
+   - MobaXterm의 SFTP를 활용해 JAR 파일을 서버의 지정 디렉토리로 전송.
+
+4. **JAR 파일 실행**:
+   ```bash
+   nohup java -jar /home/username/myapp.jar &
+   ```
+   - 예: `nohup java -jar purewithme/purewithme-0.0.1-SNAPSHOT.jar &`
+
+5. **실행 로그 확인**:
+   ```bash
+   tail -f nohup.out
+   ```
+
+---
+
+## 깨달은 점
+
+MobaXterm을 활용해 서버 관리 작업을 자동화하고, 효율적인 배포 환경을 구성할 수 있음을 학습함.
 
 
-
-<설치 방법> 
-2. Session → SSH 작성
-   >- Remote host : 원격 접속할 ip/’도메인’ → 싸피 제공의 경우 [i6a604.p.ssafy.io/](http://i6a604.p.ssafy.io/)
-   >   - username : ubuntu
-   >   - advanced SSH settings → Use private Key에서 pem키 등록
-   > 						  서버의 SSH 키를 .pem형식으로 로컬에 다운해서 꼭 넣어야 함.
-
-3. 접속하여 mysql, nginx 설치
-	 참고 : https://chaarles.tistory.com/21](https://chaarles.tistory.com/21) 
-
-
-4. mysql과 workbench 연결
->	- ubuntu에서 mysql 접속 : sudo /usr/bin/mysql -u root -p
->	-  root이름으로, 외부 모든 곳에서 접근 가능한 유저 생성 
->	    (원래 root는 'root'@'localhost'임) & 모든 권한 부여
->	    `mysql> create user 'root'@'%' identified by '[password]';
->	     `mysql> grant all privileges on *.* to 'root'@'%' with grant option;`
-
-참고 :  https://sutechblog.tistory.com/94 
-
-
-
-###  MobaXterm 사용해서 서버에 JAR파일 올리기
-> 서버의 IP 확인 → 서버 확인/종료 → JAR파일 업로드? → 서버 재시작
-> 	  1. ip addr show
-> 		  `서버의 모든 네트워크 인터페이스와 IP주소 확인`
-> 	
-> 	 2-1. ps aux | grep java 
-> 		   `예시 출력:
-> 		   `USER   PID %CPU %MEM VSZ    RSS TTY STAT START TIME COMMAND #          ubuntu 1234 0.2 1.2 3403448 40124 ?  Sl  10:00 0:10 java -jar myapp.jar`
-> 	  2-2. sudo lsof -i :8080
-> 		 `포트 8080을 사용하는 프로세스 확인
-> 	  
-> 	  3. sudo kill -9 1234
-> 		  `PID 1234인 프로세스를 종료`
-> 		  `위 명령에서 `-9`는 SIGKILL 신호를 의미하며, 해당 프로세스를 강제 종료.`
-> 	  
-> 	  4. nohup java -jar /home/username/myapp.jar &
-> 	    `nohup java -jar purewithme/purewithme-0.0.1-SNAPSHOT.jar &`
-> 	    
->       5. tail -f nohup.out  
-> 	     `실행 로그 확인` 
 
 
 

@@ -66,9 +66,8 @@
 ---
 💬 Contact
 
-- **Email**: [your.email@example.com](mailto\:your.email@example.com)
-- **LinkedIn**: [Your Profile](https://linkedin.com/in/yourprofile)
-- **GitHub**: [Your GitHub](https://github.com/yourusername)
+- **Email**: oncemylife@naver.com
+- **GitHub**: https://github.com/scarletJeong/study
 
 
 
